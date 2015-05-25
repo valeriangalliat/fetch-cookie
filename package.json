@@ -4,10 +4,7 @@
   "description": "Decorator for a `fetch` function to support automatic cookies.",
   "homepage": "https://github.com/valeriangalliat/fetch-cookie",
   "bugs": "https://github.com/valeriangalliat/fetch-cookie/issues",
-  "license": {
-    "type": "Unlicense",
-    "url": "http://unlicense.org/"
-  },
+  "license": "Unlicense",
   "author": {
     "name": "Valérian Galliat",
     "url": "http://val.codejam.info/"
