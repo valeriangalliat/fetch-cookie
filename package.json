@@ -18,6 +18,9 @@
     "type": "git",
     "url": "https://github.com/valeriangalliat/fetch-cookie.git"
   },
+  "scripts": {
+    "test": "standard"
+  },
   "dependencies": {
     "es6-denodeify": "^0.1.1",
     "object-assign": "^2.0.0",
@@ -26,8 +29,5 @@
   },
   "devDependencies": {
     "standard": "^4.0.1"
-  },
-  "scripts": {
-    "test": "standard"
   }
 }
