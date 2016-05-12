@@ -20,13 +20,13 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
         }))
       })
       .then(function (res) {
-        var cookie = res.headers.get('set-cookie')
+        var cookies = res.headers.getAll('set-cookie')
 
-        if (!cookie) {
+        if (!cookies.length) {
           return res
         }
 
-        return setCookie(cookie, url)
+        return Promise.all(cookies.map(cookie => setCookie(cookie, url)))
           .then(function () {
             return res
           })
