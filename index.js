@@ -26,11 +26,11 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
           return res
         }
 
-        return Promise.all(cookies.map(function(cookie){
-          return setCookie(cookie,url);
+        return Promise.all(cookies.map(function (cookie) {
+          return setCookie(cookie, url)
         })).then(function () {
           return res
-        });
-      });
+        })
+      })
   }
 }
