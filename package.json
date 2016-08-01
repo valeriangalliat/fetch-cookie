@@ -25,7 +25,7 @@
     "es6-denodeify": "^0.1.1",
     "object-assign": "^2.0.0",
     "promise": "^7.0.1",
-    "tough-cookie": "^1.1.0"
+    "tough-cookie": "^2.3.1"
   },
   "devDependencies": {
     "standard": "^4.0.1"
