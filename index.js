@@ -1,5 +1,3 @@
-var assign = Object.assign || require('object-assign')
-var Promise = Promise || require('promise')
 var denodeify = require('es6-denodeify')(Promise)
 var tough = require('tough-cookie')
 
@@ -15,8 +13,8 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
 
     return getCookieString(url)
       .then(function (cookie) {
-        return fetch(url, assign(opts, {
-          headers: assign(opts.headers || {}, { cookie: cookie })
+        return fetch(url, Object.assign(opts, {
+          headers: Object.assign(opts.headers || {}, { cookie: cookie })
         }))
       })
       .then(function (res) {
