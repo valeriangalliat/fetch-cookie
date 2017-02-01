@@ -11,6 +11,7 @@
   },
   "files": [
     "index.js",
+    "node-fetch.js",
     "README.md",
     "UNLICENSE"
   ],
