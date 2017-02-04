@@ -27,3 +27,22 @@ second argument.
 [cookie-jar]: https://github.com/SalesforceEng/tough-cookie#cookiejar
 
 All calls to `fetch` will store and send back cookies according to the URL.
+
+Cookies and redirection
+-----------------------
+
+By default, cookies are not set correctly in the edge case where a response
+sets cookies and redirects to another URL. A real-life example of this behaviour
+is a login page setting a session cookie and redirecting.
+
+The reason for this limitation is that the generic fetch API does not allow any way to
+hook into redirects. However, the [node-fetch] library does expose its own API which
+we can use.
+
+Long story short: If cookies during indirection turns out to be a requirement for you,
+and if you are using [node-fetch], then you can use the custom node-fetch decorator
+provided with this library:
+
+```js
+var fetch = require('fetch-cookie/node-fetch')(require('node-fetch'))
+```
