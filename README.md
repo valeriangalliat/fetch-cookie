@@ -39,7 +39,7 @@ The reason for this limitation is that the generic fetch API does not allow any 
 hook into redirects. However, the [node-fetch] library does expose its own API which
 we can use.
 
-Long story short: If cookies during indirection turns out to be a requirement for you,
+Long story short: if cookies during indirection turns out to be a requirement for you,
 and if you are using [node-fetch], then you can use the custom node-fetch decorator
 provided with this library:
 
