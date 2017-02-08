@@ -2,8 +2,10 @@ module.exports = function nodeFetchCookieDecorator (nodeFetch, jar) {
   var fetchCookie = require('./')(nodeFetch, jar)
 
   return function nodeFetchCookie (url, opts) {
+    opts = Object.assign({}, opts, { redirect: 'manual' })
+
     // Forward identical options to wrapped node-fetch but tell to not handle redirection.
-    return fetchCookie(url, Object.assign({}, opts, { redirect: 'manual' }))
+    return fetchCookie(url, opts)
       .then(res => {
         var isRedirect = (res.status === 303 || ((res.status === 301 || res.status === 302) && opts.method === 'POST'))
 
