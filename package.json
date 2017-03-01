@@ -20,13 +20,18 @@
     "url": "https://github.com/valeriangalliat/fetch-cookie.git"
   },
   "scripts": {
-    "test": "standard"
+    "lint": "standard",
+    "prepublish": "npm run lint && npm test",
+    "test": "mocha"
   },
   "dependencies": {
     "es6-denodeify": "^0.1.1",
     "tough-cookie": "^2.3.1"
   },
   "devDependencies": {
+    "express": "^4.14.1",
+    "mocha": "^3.2.0",
+    "node-fetch": "^1.6.3",
     "standard": "^4.0.1"
   }
 }
