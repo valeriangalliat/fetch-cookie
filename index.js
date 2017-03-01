@@ -18,7 +18,16 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
         }))
       })
       .then(function (res) {
-        var cookies = res.headers.getAll('set-cookie')
+        var cookies
+
+        if (res.headers.getAll) {
+          // node-fetch v1
+          cookies = res.headers.getAll('set-cookie')
+        } else {
+          // node-fetch v2
+          var cookie = res.headers.get('set-cookie')
+          cookies = cookie && cookie.split(',') || []
+        }
 
         if (!cookies.length) {
           return res
