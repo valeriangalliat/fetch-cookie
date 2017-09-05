@@ -14,7 +14,7 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     return getCookieString(url)
       .then(function (cookie) {
         return fetch(url, Object.assign(opts, {
-          headers: Object.assign(opts.headers || {}, { cookie: cookie })
+          headers: Object.assign(opts.headers || {}, (cookie ? { cookie: cookie } : {}))
         }))
       })
       .then(function (res) {
