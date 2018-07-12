@@ -3,7 +3,7 @@
 const { equal } = require('assert')
 const express = require('express')
 const nodeFetch = require('node-fetch')
-const fetch = require('./')(nodeFetch)
+const fetch = require('../')(nodeFetch)
 
 const app = express()
 
