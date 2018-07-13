@@ -3,7 +3,7 @@
 const { equal } = require('assert')
 const nodeFetch = require('node-fetch')
 const fetch = require('../')(nodeFetch)
-const app = require('./test-server');
+const app = require('./test-server')
 
 describe('fetch-cookie', () => {
   let server
@@ -11,10 +11,7 @@ describe('fetch-cookie', () => {
   before('start test server', async () => {
     return new Promise((resolve, reject) => {
       server = app.listen(9999, (err) => {
-        if (err)
-          reject(err);
-        else
-          resolve();
+        if (err) { reject(err) } else { resolve() }
       })
     })
   })
@@ -42,7 +39,6 @@ describe('fetch-cookie', () => {
   })
 
   after('stop test server', () => {
-    if (server)
-      server.close();
+    if (server) { server.close() }
   })
 })
