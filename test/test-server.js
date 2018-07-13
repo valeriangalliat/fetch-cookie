@@ -1,8 +1,6 @@
 const express = require('express')
-const cookieParser = require('cookie-parser')
 
 const app = express()
-app.use(cookieParser())
 
 // Respons with a 'set-cookie' header with a single cookie with only a name and value created by the URL params
 app.get('/set', (req, res) => {
