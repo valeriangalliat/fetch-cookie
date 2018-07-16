@@ -21,7 +21,7 @@
   },
   "scripts": {
     "lint": "standard",
-    "prepublish": "npm run lint && npm test",
+    "prepare": "npm run lint && npm test",
     "test": "mocha"
   },
   "dependencies": {
