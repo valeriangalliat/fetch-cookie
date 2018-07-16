@@ -26,7 +26,8 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
         } else {
           // node-fetch v2
           var cookie = res.headers.get('set-cookie')
-          cookies = cookie && cookie.split(',') || []
+          // FIXME: This is not working. See issue #22 (https://github.com/valeriangalliat/fetch-cookie/issues/22)
+          cookies = cookie.split(',') || []
         }
 
         if (!cookies.length) {

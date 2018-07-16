@@ -21,7 +21,7 @@
   },
   "scripts": {
     "lint": "standard",
-    "prepublish": "npm run lint && npm test",
+    "prepare": "npm run lint && npm test",
     "test": "mocha"
   },
   "dependencies": {
@@ -29,9 +29,14 @@
     "tough-cookie": "^2.3.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.5",
+    "@types/node-fetch": "^2.1.1",
+    "chai": "^4.1.2",
     "express": "^4.14.1",
     "mocha": "^3.2.0",
     "node-fetch": "^1.6.3",
-    "standard": "^4.0.1"
+    "standard": "^11.0.1"
   }
 }
