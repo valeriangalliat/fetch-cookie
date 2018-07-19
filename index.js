@@ -8,37 +8,40 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
   var getCookieString = denodeify(jar.getCookieString.bind(jar))
   var setCookie = denodeify(jar.setCookie.bind(jar))
 
-  return function fetchCookie (url, opts) {
+  async function fetchCookie (url, opts) {
     opts = opts || {}
 
-    return getCookieString(url)
-      .then(function (cookie) {
-        return fetch(url, Object.assign(opts, {
-          headers: Object.assign(opts.headers || {}, (cookie ? { cookie: cookie } : {}))
-        }))
-      })
-      .then(function (res) {
-        var cookies
+    // Prepare request
+    const cookie = await getCookieString(url)
+    const headers = Object.assign(opts.headers || {}, (cookie ? { cookie: cookie } : {}))
+    opts = Object.assign(opts, {
+      headers: headers
+    })
 
-        if (res.headers.getAll) {
-          // node-fetch v1
-          cookies = res.headers.getAll('set-cookie')
-        } else {
-          // node-fetch v2
-          var cookie = res.headers.get('set-cookie')
-          // FIXME: This is not working. See issue #22 (https://github.com/valeriangalliat/fetch-cookie/issues/22)
-          cookies = cookie.split(',') || []
-        }
+    // Actual request
+    const res = await fetch(url, opts)
 
-        if (!cookies.length) {
-          return res
-        }
+    // Get cookie header
+    var cookies = []
+    if (res.headers.getAll) {
+      // node-fetch v1
+      cookies = res.headers.getAll('set-cookie')
+      // console.warn("You are using a fetch version that supports 'Headers.getAll' which is deprecated!")
+      // console.warn("In the future 'fetch-cookie-v2' may discontinue supporting that fetch implementation.")
+      // console.warn('Details: https://developer.mozilla.org/en-US/docs/Web/API/Headers/getAll')
+    } else {
+      // node-fetch v2
+      const headers = res.headers.raw()
+      if (headers['set-cookie'] !== undefined) {
+        cookies = headers['set-cookie']
+      }
+    }
 
-        return Promise.all(cookies.map(function (cookie) {
-          return setCookie(cookie, res.url)
-        })).then(function () {
-          return res
-        })
-      })
+    // Store all present cookies
+    await Promise.all(cookies.map((cookie) => setCookie(cookie, res.url)))
+
+    return res
   }
+
+  return fetchCookie
 }
