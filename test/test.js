@@ -17,7 +17,7 @@ describe('fetch-cookie', () => {
     })
   })
 
-  it('should a Request object', async () => {
+  it.skip('should accept a Request object', async () => {
     const res = await fetch(new nodeFetch.Request({ url: 'http://localhost:9999/get' }))
     assert.propertyVal(res, 'status', 200)
   })
