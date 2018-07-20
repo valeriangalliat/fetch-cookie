@@ -1,4 +1,4 @@
-# fetch-cookie [![npm version](http://img.shields.io/npm/v/fetch-cookie.svg?style=flat-square)](https://www.npmjs.org/package/fetch-cookie)
+# fetch-cookie [![npm version](http://img.shields.io/npm/v/fetch-cookie.svg?style=flat-square)](https://www.npmjs.org/package/fetch-cookie) [![Build Status](https://travis-ci.org/valeriangalliat/fetch-cookie.svg?branch=master)](https://travis-ci.org/valeriangalliat/fetch-cookie)
 
 > Decorator for a `fetch` function to support automatic cookies.
 
