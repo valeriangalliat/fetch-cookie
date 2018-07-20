@@ -1,37 +1,52 @@
 # fetch-cookie [![npm version](http://img.shields.io/npm/v/fetch-cookie.svg?style=flat-square)](https://www.npmjs.org/package/fetch-cookie) [![Build Status](https://travis-ci.org/valeriangalliat/fetch-cookie.svg?branch=master)](https://travis-ci.org/valeriangalliat/fetch-cookie)
 
-> Decorator for a `fetch` function to support automatic cookies.
+> Decorator for a `fetch` function to support automatic cookie storage and population.
 
-Description
------------
+## Description
 
-This library is more suited to use with a Node.js `fetch` implementation
-like [node-fetch], since the browser version is supposed to let a way
-[to include cookies in requests][include].
+`fetch-cookie` wraps arround a `fetch` function and **intercepts request options and response
+objects to store received cookies and populate request with the appropriate cookies**.
 
+This library is developed with Node.Js and fetch polyfill libraries such as [node-fetch] in mind, since
+the browser version is supposed to let a way [to include cookies in requests][include].
+Compatibility may not be guaranteed but as long as your library implements the [Fetch Standard] you should be fine.
+In case of incompatibilities, please create a new issue.
+
+[Fetch Standard]: https://fetch.spec.whatwg.org/
 [node-fetch]: https://www.npmjs.com/package/node-fetch
 [include]: http://updates.html5rocks.com/2015/03/introduction-to-fetch#sending-credentials-with-a-fetch-request
 
-Usage
------
-
-```js
-var fetch = require('fetch-cookie')(require('node-fetch'))
-```
-
-If you want to customize the [tough-cookie][] [`CookieJar`][cookie-jar]
-instance (for example, with a custom store), you can inject it as a
-second argument.
+Internally the plugin uses a cookie jar. You can insert your own (details below) but [tough-cookie] is preferred.
 
 [tough-cookie]: https://www.npmjs.com/package/tough-cookie
-[cookie-jar]: https://github.com/SalesforceEng/tough-cookie#cookiejar
+
+## Usage
+
+### Basic
+
+```js
+const nodeFetch = require('node-fetch')
+const fetch = require('fetch-cookie')(nodeFetch)
+```
+
+### Custom cookie jar
+
+If you want to customize the internal cookie jar instance (for example, with a custom store), you can inject it as a second argument:
+
+```js
+const nodeFetch = require('node-fetch')
+const tough = require('node-fetch')
+const fetch = require('fetch-cookie')(nodeFetch, new tough.CookieJar())
+```
+
+This enables you to create multiple `fetch-cookie` instances that use different cookie jars,
+esentially two different HTTP clients with different login sessions on you backend (for example).
 
 All calls to `fetch` will store and send back cookies according to the URL.
 
-Cookies and redirection
------------------------
+### Cookies on redirects
 
-By default, cookies are not set correctly in the edge case where a response
+**Details:** By default, cookies are not set correctly in the edge case where a response
 sets cookies and redirects to another URL. A real-life example of this behaviour
 is a login page setting a session cookie and redirecting.
 
@@ -39,10 +54,11 @@ The reason for this limitation is that the generic fetch API does not allow any 
 hook into redirects. However, the [node-fetch] library does expose its own API which
 we can use.
 
-Long story short: if cookies during indirection turns out to be a requirement for you,
+**TLDR:** Ff cookies during indirection turns out to be a requirement for you,
 and if you are using [node-fetch], then you can use the custom node-fetch decorator
 provided with this library:
 
 ```js
-var fetch = require('fetch-cookie/node-fetch')(require('node-fetch'))
+const nodeFetch = require('node-fetch')
+const fetch = require('fetch-cookie/node-fetch')(nodeFetch)
 ```
