@@ -35,7 +35,7 @@ If you want to customize the internal cookie jar instance (for example, with a c
 
 ```js
 const nodeFetch = require('node-fetch')
-const tough = require('node-fetch')
+const tough = require('tough-cookie')
 const fetch = require('fetch-cookie')(nodeFetch, new tough.CookieJar())
 ```
 
