@@ -56,8 +56,14 @@ describe('fetch-cookie', () => {
     // Compare the two clients (jars)
     assert.notEqual(cookie1, cookie2)
     assert.notStrictEqual(cookie1.key, cookie2.key)
-    assert.notProperty(cookies1, cookie2)
-    assert.notProperty(cookies2, cookie1)
+
+    Object.keys(cookies1).forEach(cookie1Key => {
+      assert.notProperty(cookie2, cookie1Key)
+    })
+
+    Object.keys(cookies2).forEach(cookie2Key => {
+      assert.notProperty(cookie1, cookie2Key)
+    })
   })
 
   // TODO: Remove this test once node-fetch v1 is not supported anymore
