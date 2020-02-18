@@ -25,8 +25,8 @@ Internally the plugin uses a cookie jar. You can insert your own (details below)
 ### Basic
 
 ```js
-const nodeFetch = require('node-fetch');
-const fetch = require('fetch-cookie')(nodeFetch);
+const nodeFetch = require('node-fetch')
+const fetch = require('fetch-cookie')(nodeFetch)
 ```
 
 ### Custom cookie jar
@@ -34,9 +34,9 @@ const fetch = require('fetch-cookie')(nodeFetch);
 If you want to customize the internal cookie jar instance (for example, with a custom store), you can inject it as a second argument:
 
 ```js
-const nodeFetch = require('node-fetch');
-const fetchCookie = require('fetch-cookie');
-const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar());
+const nodeFetch = require('node-fetch')
+const fetchCookie = require('fetch-cookie')
+const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar())
 ```
 
 This enables you to create multiple `fetch-cookie` instances that use different cookie jars,
@@ -59,6 +59,6 @@ and if you are using [node-fetch], then you can use the custom node-fetch decora
 provided with this library:
 
 ```js
-const nodeFetch = require('node-fetch');
-const fetch = require('fetch-cookie/node-fetch')(nodeFetch);
+const nodeFetch = require('node-fetch')
+const fetch = require('fetch-cookie/node-fetch')(nodeFetch)
 ```
