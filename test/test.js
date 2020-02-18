@@ -11,13 +11,8 @@ describe('fetch-cookie', () => {
 
   before('start test server', async () => {
     return new Promise((resolve, reject) => {
-      server = app.listen(9999, err => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
-        }
-      })
+      server = app.listen(9999, (err) => {
+        if (err) { reject(err) } else { resolve() }
     })
   })
 
@@ -113,8 +108,6 @@ describe('fetch-cookie', () => {
   })
 
   after('stop test server', () => {
-    if (server) {
-      server.close()
-    }
+    if (server) { server.close() }
   })
 })
