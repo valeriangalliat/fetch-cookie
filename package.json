@@ -21,6 +21,7 @@
   },
   "scripts": {
     "lint": "standard",
+    "fix": "standard --fix",
     "prepare": "npm run lint && npm test",
     "test": "mocha"
   },

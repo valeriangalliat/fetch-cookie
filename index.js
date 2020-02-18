@@ -19,10 +19,7 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     } else if (opts.headers && typeof opts.headers.append === 'function') {
       opts.headers.append('cookie', cookie)
     } else {
-      opts.headers = Object.assign(
-        opts.headers || {},
-        cookie ? { cookie: cookie } : {}
-      )
+      opts.headers = Object.assign(opts.headers || {}, cookie ? { cookie: cookie } : {})
     }
 
     // Actual request
@@ -45,10 +42,12 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     }
 
     // Store all present cookies
-    await Promise.all(cookies.map((cookie) => setCookie(cookie, res.url)))
+    await Promise.all(cookies.map(cookie => setCookie(cookie, res.url)))
 
     return res
   }
-
+  fetchCookie.toughCookie = tough // Export for making you own CookieJars
   return fetchCookie
 }
+
+module.exports.toughCookie = tough // Export for making you own CookieJars
