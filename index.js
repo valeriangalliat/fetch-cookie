@@ -45,7 +45,7 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     }
 
     // Store all present cookies
-    await Promise.all(cookies.map(cookie => setCookie(cookie, res.url)))
+    await Promise.all(cookies.map((cookie) => setCookie(cookie, res.url)))
 
     return res
   }
