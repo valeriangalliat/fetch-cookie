@@ -19,7 +19,10 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     } else if (opts.headers && typeof opts.headers.append === 'function') {
       opts.headers.append('cookie', cookie)
     } else {
-      opts.headers = Object.assign(opts.headers || {}, cookie ? { cookie: cookie } : {})
+      opts.headers = Object.assign(
+        opts.headers || {},
+        cookie ? { cookie: cookie } : {}
+      )
     }
 
     // Actual request
