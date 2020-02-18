@@ -13,6 +13,7 @@ describe('fetch-cookie', () => {
     return new Promise((resolve, reject) => {
       server = app.listen(9999, (err) => {
         if (err) { reject(err) } else { resolve() }
+      })
     })
   })
 
