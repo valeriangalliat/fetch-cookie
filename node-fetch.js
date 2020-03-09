@@ -11,7 +11,7 @@ module.exports = function nodeFetchCookieDecorator (nodeFetch, jar) {
 
         // Interpret the proprietary "redirect" option in the same way that node-fetch does.
         if (isRedirect && userOptions.redirect !== 'manual' && userOptions.follow !== 0) {
-          const optsForGet = Object.assign({}, {
+          const optsForGet = Object.assign({}, opts, {
             method: 'GET',
             body: null,
             // Since the "follow" flag is not relevant for node-fetch in this case,
