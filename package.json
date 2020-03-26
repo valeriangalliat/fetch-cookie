@@ -28,7 +28,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "tough-cookie": "^3.0.1 || ^4.0.0"
+    "tough-cookie": "^2.3.3 || ^3.0.1 || ^4.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.4",
@@ -40,6 +40,6 @@
     "mocha": "^7.1.1",
     "node-fetch": "^2.6.0",
     "standard": "^14.3.3",
-    "tough-cookie": "^3.0.1 || ^4.0.0"
+    "tough-cookie": "^2.3.3 || ^3.0.1 || ^4.0.0"
   }
 }
