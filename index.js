@@ -1,12 +1,12 @@
-var denodeify = require('es6-denodeify')(Promise)
-var tough = require('tough-cookie')
+const { promisify } = require('util')
+const tough = require('tough-cookie')
 
 module.exports = function fetchCookieDecorator (fetch, jar) {
   fetch = fetch || window.fetch
   jar = jar || new tough.CookieJar()
 
-  var getCookieString = denodeify(jar.getCookieString.bind(jar))
-  var setCookie = denodeify(jar.setCookie.bind(jar))
+  var getCookieString = promisify(jar.getCookieString.bind(jar))
+  var setCookie = promisify(jar.setCookie.bind(jar))
 
   async function fetchCookie (url, opts) {
     opts = opts || {}
