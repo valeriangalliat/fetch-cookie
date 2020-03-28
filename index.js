@@ -5,8 +5,8 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
   fetch = fetch || window.fetch
   jar = jar || new tough.CookieJar()
 
-  var getCookieString = promisify(jar.getCookieString.bind(jar))
-  var setCookie = promisify(jar.setCookie.bind(jar))
+  const getCookieString = promisify(jar.getCookieString.bind(jar))
+  const setCookie = promisify(jar.setCookie.bind(jar))
 
   async function fetchCookie (url, opts) {
     opts = opts || {}
