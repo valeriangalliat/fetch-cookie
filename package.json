@@ -28,7 +28,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@types/tough-cookie": "^4.0.0",
+    "@types/tough-cookie": "^2.3.3 || ^4.0.0",
     "tough-cookie": "^2.3.3 || ^3.0.1 || ^4.0.0"
   },
   "devDependencies": {
