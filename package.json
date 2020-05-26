@@ -16,6 +16,7 @@
     "index.js",
     "node-fetch.js",
     "index.d.ts",
+    "node-fetch.d.ts",
     "README.md",
     "UNLICENSE"
   ],
@@ -29,7 +30,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@types/tough-cookie": "^2.3.3 || ^4.0.0",
     "tough-cookie": "^2.3.3 || ^3.0.1 || ^4.0.0"
   },
   "devDependencies": {

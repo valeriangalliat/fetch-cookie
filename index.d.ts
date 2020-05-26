@@ -1,5 +1,10 @@
-import { CookieJar } from 'tough-cookie'
+declare namespace c {
+  interface CookieJar {
+    getCookieString(currentUrl: string, cb: (err: any, cookies: string) => void): void;
+    setCookie(cookieString: string, currentUrl: string, cb: (err: any) => void): void;
+  }
+}
 
-declare function fetchCookieDecorator(fetch: Function, jar?: CookieJar): any;
+declare function c(fetch: Function, jar?: c.CookieJar): Function;
 
-export = fetchCookieDecorator;
+export = c;
