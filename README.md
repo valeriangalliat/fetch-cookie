@@ -44,6 +44,15 @@ esentially two different HTTP clients with different login sessions on you backe
 
 All calls to `fetch` will store and send back cookies according to the URL.
 
+If you use a cookie jar that is not tough-cookie, keep in mind that it must implement this interface to be compatible:
+
+```ts
+interface CookieJar {
+  getCookieString(currentUrl: string, cb: (err: any, cookies: string) => void): void;
+  setCookie(cookieString: string, currentUrl: string, cb: (err: any) => void): void;
+}
+```
+
 ### Cookies on redirects
 
 **Details:** By default, cookies are not set correctly in the edge case where a response
