@@ -108,6 +108,30 @@ describe('fetch-cookie', () => {
     assert.notStrictEqual(cookie1.key, cookie2.key)
   })
 
+  it("should ignore error when there is error in setCookie", async () => {
+    const jar = new CookieJar();
+    const fetch = require('../index')(nodeFetch, jar);
+    let error = null;
+    try {
+      await fetch('http://localhost:9999/cookie');
+    } catch (err) {
+      error = err;
+    }
+    assert.isNull(error);
+  });
+
+  it('should throw error when there is error in setCookie', async () => {
+    const jar = new CookieJar();
+    const fetch = require('../index')(nodeFetch, jar, false);
+    let error = null;
+    try {
+      await fetch('http://localhost:9999/cookie');
+    } catch (err) {
+      error = err;
+    }
+    assert.instanceOf(error, Error)
+  });
+
   after('stop test server', () => {
     if (server) { server.close() }
   })

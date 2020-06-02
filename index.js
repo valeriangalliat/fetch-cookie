@@ -1,7 +1,7 @@
 const { promisify } = require('util')
 const tough = require('tough-cookie')
 
-module.exports = function fetchCookieDecorator (fetch, jar) {
+module.exports = function fetchCookieDecorator (fetch, jar, ignoreError = true) {
   fetch = fetch || window.fetch
   jar = jar || new tough.CookieJar()
 
@@ -45,7 +45,7 @@ module.exports = function fetchCookieDecorator (fetch, jar) {
     }
 
     // Store all present cookies
-    await Promise.all(cookies.map((cookie) => setCookie(cookie, res.url)))
+    await Promise.all(cookies.map((cookie) => setCookie(cookie, res.url, { ignoreError })))
 
     return res
   }

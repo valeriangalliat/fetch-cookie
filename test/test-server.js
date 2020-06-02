@@ -30,4 +30,13 @@ app.get('/redirect', (req, res) => {
   res.redirect('http://localhost:9998/get') // FIXME: There is nothing at this port ...
 })
 
+app.get('/cookie', (req, res) => {
+  res.setHeader(
+    'set-cookie',
+    'my_cookie=HelloWorld; path=/; domain=www.example.com; secure; HttpOnly; SameSite=Lax'
+  );
+  res.cookie('tuna', 'can');
+  res.end()
+});
+
 module.exports = app
