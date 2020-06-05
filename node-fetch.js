@@ -15,7 +15,7 @@ module.exports = function nodeFetchCookieDecorator (nodeFetch, jar) {
           let statusOpts = {
             // Since the "follow" flag is not relevant for node-fetch in this case,
             // we'll hijack it for our internal bookkeeping.
-						follow: userOptions.follow !== undefined ? userOptions.follow - 1 : undefined,
+	          follow: userOptions.follow !== undefined ? userOptions.follow - 1 : undefined,
           }
             
           if (res.status !== 307) {
