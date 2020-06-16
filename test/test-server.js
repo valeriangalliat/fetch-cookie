@@ -34,9 +34,9 @@ app.get('/cookie', (req, res) => {
   res.setHeader(
     'set-cookie',
     'my_cookie=HelloWorld; path=/; domain=www.example.com; secure; HttpOnly; SameSite=Lax'
-  );
-  res.cookie('tuna', 'can');
+  )
+  res.cookie('tuna', 'can')
   res.end()
-});
+})
 
 module.exports = app
