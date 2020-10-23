@@ -5,6 +5,6 @@ declare namespace c {
   }
 }
 
-declare function c(fetch: Function, jar?: c.CookieJar, ignoreError?: boolean): Function;
+declare function c<T extends Function>(fetch: T, jar?: c.CookieJar, ignoreError?: boolean): T;
 
 export = c;
