@@ -1,6 +1,6 @@
 {
   "name": "fetch-cookie",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "Decorator for a `fetch` function to support automatic cookies.",
   "homepage": "https://github.com/valeriangalliat/fetch-cookie",
   "bugs": "https://github.com/valeriangalliat/fetch-cookie/issues",
