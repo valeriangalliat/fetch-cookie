@@ -26,6 +26,12 @@ app.get('/get', (req, res) => {
   res.json(cookies)
 })
 
+app.get('/ok-if-empty', (req, res) => {
+  // Get cookies
+  let response = req.headers.cookie === undefined  ? {"status": "ok"} : {"status": "not-ok"}
+  res.json(response)
+})
+
 app.get('/redirect', (req, res) => {
   res.redirect('http://localhost:9998/get') // FIXME: There is nothing at this port ...
 })
