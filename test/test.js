@@ -27,7 +27,7 @@ describe('fetch-cookie', () => {
     const req = new nodeFetch.Request('http://localhost:9999/ok-if-empty')
     const res = await fetch(req)
 
-    assert.deepEqual(await res.json(), {"status": "ok"})
+    assert.deepEqual(await res.json(), { status: 'ok' })
   })
 
   it('should handle cookies (using internal cookie jar)', async () => {

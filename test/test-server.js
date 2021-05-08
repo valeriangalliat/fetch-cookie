@@ -28,7 +28,7 @@ app.get('/get', (req, res) => {
 
 app.get('/ok-if-empty', (req, res) => {
   // Get cookies
-  let response = req.headers.cookie === undefined  ? {"status": "ok"} : {"status": "not-ok"}
+  const response = { status: req.headers.cookie === undefined ? 'ok' : 'not-ok' }
   res.json(response)
 })
 
