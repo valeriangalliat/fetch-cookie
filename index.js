@@ -15,9 +15,9 @@ module.exports = function fetchCookieDecorator (fetch, jar, ignoreError = true) 
     const cookie = await getCookieString(typeof url === 'string' ? url : url.url)
 
     if (url.headers && typeof url.headers.append === 'function') {
-      url.headers.append('cookie', cookie)
+      cookie && url.headers.append('cookie', cookie)
     } else if (opts.headers && typeof opts.headers.append === 'function') {
-      opts.headers.append('cookie', cookie)
+      cookie && opts.headers.append('cookie', cookie)
     } else {
       opts.headers = Object.assign(
         opts.headers || {},
