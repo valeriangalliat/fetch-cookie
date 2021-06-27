@@ -2,9 +2,9 @@
 
 const { assert } = require('chai')
 const nodeFetch = require('node-fetch')
-var { CookieJar, Cookie } = require('tough-cookie')
 const fetch = require('../')(nodeFetch)
 const app = require('./test-server')
+var { CookieJar, Cookie } = fetch.toughCookie
 
 describe('fetch-cookie', () => {
   let server

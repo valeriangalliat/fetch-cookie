@@ -49,6 +49,8 @@ module.exports = function fetchCookieDecorator (fetch, jar, ignoreError = true) 
 
     return res
   }
-
+  fetchCookie.toughCookie = tough // Export for making you own CookieJars
   return fetchCookie
 }
+
+module.exports.toughCookie = tough // Export for making you own CookieJars

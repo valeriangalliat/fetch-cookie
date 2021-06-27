@@ -12,7 +12,7 @@ the browser version is supposed to let a way [to include cookies in requests][in
 Compatibility may not be guaranteed but as long as your library implements the [Fetch Standard] you should be fine.
 In case of incompatibilities, please create a new issue.
 
-[Fetch Standard]: https://fetch.spec.whatwg.org/
+[fetch standard]: https://fetch.spec.whatwg.org/
 [node-fetch]: https://www.npmjs.com/package/node-fetch
 [include]: http://updates.html5rocks.com/2015/03/introduction-to-fetch#sending-credentials-with-a-fetch-request
 
@@ -35,8 +35,8 @@ If you want to customize the internal cookie jar instance (for example, with a c
 
 ```js
 const nodeFetch = require('node-fetch')
-const tough = require('tough-cookie')
-const fetch = require('fetch-cookie')(nodeFetch, new tough.CookieJar())
+const fetchCookie = require('fetch-cookie')
+const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar())
 ```
 
 This enables you to create multiple `fetch-cookie` instances that use different cookie jars,
