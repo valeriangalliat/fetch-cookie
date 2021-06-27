@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [1.0.0] - 2021-06-27
-* After 6 years of existence, probably time to release 1.0.0! 🎉
+* Those changes are not breaking, but after 6 years of existence,
+  it's probably a good time to release 1.0.0! 🎉
 * Integrate with GitHub workflows. ([#63])
 * Fix regression with empty cookie header. ([#63])
 * Export `toughCookie` dependency on fetch-cookie module and instance. ([#44])
