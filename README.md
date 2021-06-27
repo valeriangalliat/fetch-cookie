@@ -1,22 +1,27 @@
-# fetch-cookie [![npm version](https://badge.fury.io/js/fetch-cookie.svg)](https://badge.fury.io/js/fetch-cookie) [![Build Status](https://travis-ci.org/valeriangalliat/fetch-cookie.svg?branch=master)](https://travis-ci.org/valeriangalliat/fetch-cookie)
+# fetch-cookie [![npm version](http://img.shields.io/npm/v/fetch-cookie.svg?style=flat-square)](https://www.npmjs.org/package/fetch-cookie) [![Build status](https://img.shields.io/github/workflow/status/valeriangalliat/fetch-cookie/Test)](https://github.com/valeriangalliat/fetch-cookie/actions/workflows/test.yml)
 
-> Decorator for a `fetch` function to support automatic cookie storage and population.
+> Decorator for a `fetch` function to support automatic cookie storage
+> and population.
 
 ## Description
 
-`fetch-cookie` wraps arround a `fetch` function and **intercepts request options and response
-objects to store received cookies and populate request with the appropriate cookies**.
+fetch-cookie wraps arround a `fetch` function and **intercepts request
+options and response objects to store received cookies and populate
+request with the appropriate cookies**.
 
-This library is developed with Node.Js and fetch polyfill libraries such as [node-fetch] in mind, since
-the browser version is supposed to let a way [to include cookies in requests][include].
-Compatibility may not be guaranteed but as long as your library implements the [Fetch Standard] you should be fine.
-In case of incompatibilities, please create a new issue.
+This library is developed with Node.Js and fetch polyfill libraries such
+as [node-fetch] in mind, since the browser version is supposed to let a
+way [to include cookies in requests][include]. Compatibility may not be
+guaranteed but as long as your library implements the [Fetch standard]
+you should be fine. In case of incompatibilities, please create a new
+issue.
 
-[fetch standard]: https://fetch.spec.whatwg.org/
+[Fetch standard]: https://fetch.spec.whatwg.org/
 [node-fetch]: https://www.npmjs.com/package/node-fetch
 [include]: http://updates.html5rocks.com/2015/03/introduction-to-fetch#sending-credentials-with-a-fetch-request
 
-Internally the plugin uses a cookie jar. You can insert your own (details below) but [tough-cookie] is preferred.
+Internally the plugin uses a cookie jar. You can insert your own
+(details below) but [tough-cookie] is preferred.
 
 [tough-cookie]: https://www.npmjs.com/package/tough-cookie
 
@@ -31,7 +36,8 @@ const fetch = require('fetch-cookie')(nodeFetch)
 
 ### Custom cookie jar
 
-If you want to customize the internal cookie jar instance (for example, with a custom store), you can inject it as a second argument:
+If you want to customize the internal cookie jar instance (for example,
+with a custom store), you can inject it as a second argument:
 
 ```js
 const nodeFetch = require('node-fetch')
@@ -39,12 +45,21 @@ const fetchCookie = require('fetch-cookie')
 const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar())
 ```
 
-This enables you to create multiple `fetch-cookie` instances that use different cookie jars,
-esentially two different HTTP clients with different login sessions on you backend (for example).
+Here, we expose the tough-cookie version that we depend on internally so
+you can just reuse it and don't end up accidentally bundling two
+different versions. That being said you can use any version of
+tough-cookie here, or even any compatible cookie jar.
 
-All calls to `fetch` will store and send back cookies according to the URL.
+This enables you to create multiple fetch-cookie instances that use
+different cookie jars, esentially two different HTTP clients with
+different login sessions on you backend (for example).
 
-> Note: All errors when setting cookies are ignored by default. You can make it to throw errors in cookies by passing a third argument (default is true).
+All calls to `fetch` will store and send back cookies according to the
+URL.
+
+> Note: all errors when setting cookies are ignored by default. You can
+> make it to throw errors in cookies by passing a third argument (default
+>   is true).
 
 ```js
 const nodeFetch = require('node-fetch')

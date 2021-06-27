@@ -4,7 +4,7 @@ const { assert } = require('chai')
 const nodeFetch = require('node-fetch')
 const fetch = require('../')(nodeFetch)
 const app = require('./test-server')
-var { CookieJar, Cookie } = fetch.toughCookie
+const { CookieJar, Cookie } = fetch.toughCookie
 
 describe('fetch-cookie', () => {
   let server
@@ -26,8 +26,7 @@ describe('fetch-cookie', () => {
   it('should not send empty cookie header', async () => {
     const req = new nodeFetch.Request('http://localhost:9999/ok-if-empty')
     const res = await fetch(req)
-
-    assert.deepEqual(await res.json(), { status: 'ok' })
+    assert.propertyVal(res, 'status', 200)
   })
 
   it('should handle cookies (using internal cookie jar)', async () => {
@@ -36,7 +35,8 @@ describe('fetch-cookie', () => {
     assert.deepEqual(await res.json(), ['foo=bar'])
   })
 
-  // This test esentially tests if to clients with different jars are completely separated and don't share state
+  // This test esentially tests if to clients with different jars are
+  // completely separated and don't share state.
   it('should handle cookies (using custom cookie jar)', async () => {
     // Client 1
     const jar1 = new CookieJar()

@@ -14,22 +14,25 @@ module.exports = function fetchCookieDecorator (fetch, jar, ignoreError = true) 
     // Prepare request
     const cookie = await getCookieString(typeof url === 'string' ? url : url.url)
 
-    if (url.headers && typeof url.headers.append === 'function') {
-      cookie && url.headers.append('cookie', cookie)
-    } else if (opts.headers && typeof opts.headers.append === 'function') {
-      cookie && opts.headers.append('cookie', cookie)
-    } else {
-      opts.headers = Object.assign(
-        opts.headers || {},
-        cookie ? { cookie: cookie } : {}
-      )
+    if (cookie) {
+      if (url.headers && typeof url.headers.append === 'function') {
+        url.headers.append('cookie', cookie)
+      } else if (opts.headers && typeof opts.headers.append === 'function') {
+        opts.headers.append('cookie', cookie)
+      } else {
+        opts.headers = Object.assign(
+          opts.headers || {},
+          cookie ? { cookie: cookie } : {}
+        )
+      }
     }
 
     // Actual request
     const res = await fetch(url, opts)
 
     // Get cookie header
-    var cookies = []
+    let cookies = []
+
     if (res.headers.getAll) {
       // node-fetch v1
       cookies = res.headers.getAll('set-cookie')
@@ -49,8 +52,10 @@ module.exports = function fetchCookieDecorator (fetch, jar, ignoreError = true) 
 
     return res
   }
-  fetchCookie.toughCookie = tough // Export for making you own CookieJars
+
+  fetchCookie.toughCookie = tough
+
   return fetchCookie
 }
 
-module.exports.toughCookie = tough // Export for making you own CookieJars
+module.exports.toughCookie = tough
