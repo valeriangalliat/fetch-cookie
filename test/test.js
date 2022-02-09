@@ -2,9 +2,12 @@
 
 const { assert } = require('chai')
 const nodeFetch = require('node-fetch')
-const fetch = require('../')(nodeFetch)
+const fetchCookie = require('..')
+const nodeFetchCookie = require('../node-fetch')
 const app = require('./test-server')
-const { CookieJar, Cookie } = fetch.toughCookie
+const { CookieJar, Cookie } = fetchCookie.toughCookie
+
+const fetch = fetchCookie(nodeFetch)
 
 describe('fetch-cookie', () => {
   let server
@@ -40,7 +43,7 @@ describe('fetch-cookie', () => {
   it('should handle cookies (using custom cookie jar)', async () => {
     // Client 1
     const jar1 = new CookieJar()
-    const fetch1 = require('../index')(nodeFetch, jar1)
+    const fetch1 = fetchCookie(nodeFetch, jar1)
     await fetch1('http://localhost:9999/set?name=foo&value=bar')
     const cookies1 = jar1.store.idx.localhost['/']
     assert.property(cookies1, 'foo')
@@ -51,7 +54,7 @@ describe('fetch-cookie', () => {
 
     // Client 2
     const jar2 = new CookieJar()
-    const fetch2 = require('../index')(nodeFetch, jar2)
+    const fetch2 = fetchCookie(nodeFetch, jar2)
     await fetch2('http://localhost:9999/set?name=tuna&value=can')
     const cookies2 = jar2.store.idx.localhost['/']
     assert.property(cookies2, 'tuna')
@@ -92,7 +95,7 @@ describe('fetch-cookie', () => {
 
   it("should handle multiple cookies (including comma in 'expires' option)", async () => {
     const jar = new CookieJar()
-    const fetch = require('../index')(nodeFetch, jar)
+    const fetch = fetchCookie(nodeFetch, jar)
     await fetch('http://localhost:9999/set-multiple')
     const cookies = jar.store.idx.localhost['/']
 
@@ -117,7 +120,7 @@ describe('fetch-cookie', () => {
 
   it('should ignore error when there is error in setCookie', async () => {
     const jar = new CookieJar()
-    const fetch = require('../index')(nodeFetch, jar)
+    const fetch = fetchCookie(nodeFetch, jar)
     let error = null
     try {
       await fetch('http://localhost:9999/cookie')
@@ -129,7 +132,7 @@ describe('fetch-cookie', () => {
 
   it('should throw error when there is error in setCookie', async () => {
     const jar = new CookieJar()
-    const fetch = require('../index')(nodeFetch, jar, false)
+    const fetch = fetchCookie(nodeFetch, jar, false)
     let error = null
     try {
       await fetch('http://localhost:9999/cookie')
@@ -137,6 +140,22 @@ describe('fetch-cookie', () => {
       error = err
     }
     assert.instanceOf(error, Error)
+  })
+
+  it('should handle redirects', async () => {
+    const jar = new CookieJar()
+    const fetch = nodeFetchCookie(nodeFetch, jar)
+    const res = await fetch('http://localhost:9999/set-redirect?name=foo&value=bar')
+    assert.isTrue(res.redirected)
+    assert.deepEqual(await res.json(), ['foo=bar'])
+  })
+
+  it('should handle relative redirects', async () => {
+    const jar = new CookieJar()
+    const fetch = nodeFetchCookie(nodeFetch, jar)
+    const res = await fetch('http://localhost:9999/set-relative-redirect?name=foo&value=bar')
+    assert.isTrue(res.redirected)
+    assert.deepEqual(await res.json(), ['foo=bar'])
   })
 
   after('stop test server', () => {

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.1] - 2022-02-09
+* Fix relative redirect URL with the fetch-cookie wrapper. ([#65])
+
 ## [1.0.0] - 2021-06-27
 * Those changes are not breaking, but after 6 years of existence,
   it's probably a good time to release 1.0.0! 🎉
@@ -70,7 +73,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.11.0...v1.0.0
 [0.11.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.10.0...v0.10.1
@@ -114,3 +118,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#58]: https://github.com/valeriangalliat/fetch-cookie/pull/58
 [#60]: https://github.com/valeriangalliat/fetch-cookie/pull/60
 [#63]: https://github.com/valeriangalliat/fetch-cookie/pull/63
+[#65]: https://github.com/valeriangalliat/fetch-cookie/issues/65

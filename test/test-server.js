@@ -10,6 +10,18 @@ app.get('/set', (req, res) => {
   res.end()
 })
 
+app.get('/set-redirect', (req, res) => {
+  const { name, value } = req.query
+  res.set('set-cookie', `${name}=${value}`)
+  res.redirect('http://localhost:9999/get')
+})
+
+app.get('/set-relative-redirect', (req, res) => {
+  const { name, value } = req.query
+  res.set('set-cookie', `${name}=${value}`)
+  res.redirect('/get')
+})
+
 // Responds with two cookies. We want to cause a `set-cookie` header with a
 // comma in the cookie to be able to test correct parsing on the client side.
 app.get('/set-multiple', (req, res) => {
@@ -35,10 +47,6 @@ app.get('/ok-if-empty', (req, res) => {
   }
 
   res.end()
-})
-
-app.get('/redirect', (req, res) => {
-  res.redirect('http://localhost:9998/get') // FIXME: There is nothing at this port ...
 })
 
 app.get('/cookie', (req, res) => {
