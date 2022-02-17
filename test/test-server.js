@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express'
 
 const app = express()
 
@@ -6,13 +6,13 @@ const app = express()
 // and value created by the URL params.
 app.get('/set', (req, res) => {
   const { name, value } = req.query
-  res.set('set-cookie', `${name}=${value}`)
+  res.setHeader('Set-Cookie', `${name}=${value}`)
   res.end()
 })
 
 app.get('/set-redirect', (req, res) => {
   const { name, value } = req.query
-  res.set('set-cookie', `${name}=${value}`)
+  res.setHeader('Set-Cookie', `${name}=${value}`)
   res.redirect('http://localhost:9999/get')
 })
 
@@ -58,4 +58,4 @@ app.get('/cookie', (req, res) => {
   res.end()
 })
 
-module.exports = app
+export default app
