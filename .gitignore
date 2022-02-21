@@ -1,5 +1,6 @@
 /node_modules
 /types
+/esm
 /cjs/*
 !/cjs/package.json
 !/cjs/index-wrapper.js
