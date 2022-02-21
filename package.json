@@ -15,7 +15,8 @@
     "build": "for format in esm cjs; do esbuild src/*.ts --format=$format --outdir=$format; done",
     "lint": "ts-standard src/*.ts test/*.js",
     "patch-undici": "sed -i 's/^const forbiddenResponseHeaderNames =.*$/const forbiddenResponseHeaderNames = []/' node_modules/undici/lib/fetch/constants.js",
-    "prepack": "npm run lint && npm run type-check && npm run build && npm test && npm run type-declarations",
+    "prepare": "npm run build && npm run type-declarations",
+    "prepack": "npm run prepare && npm run lint && npm run type-check && npm test",
     "test": "mocha",
     "type-check": "tsc -noEmit src/*.ts",
     "type-declarations": "tsc --declaration --emitDeclarationOnly src/*.ts --outDir types && echo 'export = fetchCookie;' >> types/index.d.ts"
