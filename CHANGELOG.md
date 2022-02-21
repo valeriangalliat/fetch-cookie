@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2022-02-17
+* Rewrite in TypeScript. ([#43])
+* Hybrid support of ESM and CJS.
+* Test against node-fetch v2, v3 and hypothetically WHATWG
+  spec through [Undici](https://github.com/nodejs/undici).
+* Reimplement the redirect logic based on latest most complete
+  node-fetch implementation. ([#11], [#39], [#42], [#57])
+
 ## [1.0.1] - 2022-02-09
 * Fix relative redirect URL with the fetch-cookie wrapper. ([#65])
 
@@ -73,7 +81,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.11.0...v1.0.0
 [0.11.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.10.1...v0.11.0
@@ -99,6 +108,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#4]: https://github.com/valeriangalliat/fetch-cookie/pull/4
 [#8]: https://github.com/valeriangalliat/fetch-cookie/pull/8
 [#9]: https://github.com/valeriangalliat/fetch-cookie/pull/9
+[#11]: https://github.com/valeriangalliat/fetch-cookie/issues/11
 [#12]: https://github.com/valeriangalliat/fetch-cookie/issues/12
 [#13]: https://github.com/valeriangalliat/fetch-cookie/issues/13
 [#14]: https://github.com/valeriangalliat/fetch-cookie/pull/14
@@ -108,6 +118,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#30]: https://github.com/valeriangalliat/fetch-cookie/pull/30
 [#31]: https://github.com/valeriangalliat/fetch-cookie/pull/31
 [#32]: https://github.com/valeriangalliat/fetch-cookie/pull/32
+[#39]: https://github.com/valeriangalliat/fetch-cookie/issues/39
+[#42]: https://github.com/valeriangalliat/fetch-cookie/issues/42
+[#43]: https://github.com/valeriangalliat/fetch-cookie/issues/43
 [#44]: https://github.com/valeriangalliat/fetch-cookie/pull/44
 [#46]: https://github.com/valeriangalliat/fetch-cookie/pull/46
 [#49]: https://github.com/valeriangalliat/fetch-cookie/pull/49
@@ -115,6 +128,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#53]: https://github.com/valeriangalliat/fetch-cookie/pull/53
 [#55]: https://github.com/valeriangalliat/fetch-cookie/pull/55
 [#56]: https://github.com/valeriangalliat/fetch-cookie/pull/56
+[#57]: https://github.com/valeriangalliat/fetch-cookie/issues/57
 [#58]: https://github.com/valeriangalliat/fetch-cookie/pull/58
 [#60]: https://github.com/valeriangalliat/fetch-cookie/pull/60
 [#63]: https://github.com/valeriangalliat/fetch-cookie/pull/63

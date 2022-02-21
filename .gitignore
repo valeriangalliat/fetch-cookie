@@ -1,2 +1,5 @@
 /node_modules
-/.npmrc
+/types
+/cjs/*
+!/cjs/package.json
+!/cjs/index-wrapper.js
