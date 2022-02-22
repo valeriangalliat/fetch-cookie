@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   spec through [Undici](https://github.com/nodejs/undici).
 * Reimplement the redirect logic based on latest most complete
   node-fetch implementation. ([#11], [#39], [#42], [#57])
+* **Breaking:** the redirect logic is now included in the main
+  export and the node-fetch wrapper (`require('fetch-cookie/node-fetch')`)
+  was removed. Just `require('node-fetch')` and you're good to go with
+  redirects!
 
 ## [1.0.1] - 2022-02-09
 * Fix relative redirect URL with the fetch-cookie wrapper. ([#65])

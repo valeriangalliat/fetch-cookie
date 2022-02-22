@@ -3,6 +3,8 @@
 > Decorator for a `fetch` function to support automatic cookie storage
 > and population.
 
+[Migrating from v1](#migrating-from-v1)
+
 ## Description
 
 fetch-cookie wraps around a `fetch` function and **intercepts request
@@ -124,6 +126,28 @@ forward cookies accordingly.
 
 This is useful for example when a login page sets a session cookie and
 redirects to another page.
+
+## Migrating from v1
+
+The only breaking change with v2 is that the node-fetch wrapper (that
+was handling redirects only with node-fetch nonstandard APIs) was
+dropped and the redirects are now always handled by the main export.
+
+```js
+// If you were doing
+const fetchCookie = require('fetch-cookie/node-fetch')
+
+// Change it to
+const fetchCookie = require('fetch-cookie')
+
+// Or
+import fetchCookie from 'fetch-cookie'
+```
+
+This also means that if you were *not* using the node-fetch wrapper and
+were happy about cookies *not* being included in redirects, cookies are
+now going to be stored and sent in redirects as well like they would in
+the browser.
 
 ## Development
 
