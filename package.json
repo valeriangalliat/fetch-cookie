@@ -19,7 +19,7 @@
     "prepack": "npm run prepare && npm run lint && npm run type-check && npm test",
     "test": "mocha",
     "type-check": "tsc -noEmit src/*.ts",
-    "type-declarations": "tsc --declaration --emitDeclarationOnly src/*.ts --outDir types && echo 'export = fetchCookie;' >> types/index.d.ts"
+    "type-declarations": "tsc --declaration --emitDeclarationOnly src/*.ts --outDir types"
   },
   "dependencies": {
     "set-cookie-parser": "^2.4.8",

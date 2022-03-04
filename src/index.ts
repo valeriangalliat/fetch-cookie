@@ -6,19 +6,46 @@ import { Readable } from 'stream'
 
 type FetchImpl = typeof fetch
 
-type FetchCookieInit = RequestInit & {
+interface GenericRequest { url: string }
+
+type GenericRequestInfo = GenericRequest | string
+
+interface GenericRequestInit {
+  method?: string
+  redirect?: string
+  body?: any
+  referrerPolicy?: string
+}
+
+interface GenericResponse {
+  url: string
+  status: number
+  headers: {
+    get: (name: string) => string | null
+    has: (name: string) => boolean
+  }
+}
+
+type FetchCookieInit<T extends GenericRequestInit> = T & {
   maxRedirect?: number
   redirectCount?: number
 }
 
-interface FetchCookieImpl {
-  (input: RequestInfo, init?: FetchCookieInit): Promise<Response>
+type GenericFetch<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> = (input: T1, init?: T2) => Promise<T3>
+
+interface FetchCookieImpl<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> {
+  (input: T1, init?: FetchCookieInit<T2>): Promise<T3>
   toughCookie: typeof tough
 }
 
 type NodeFetchHeaders = Headers & {
   getAll?: (name: string) => string[]
   raw?: () => { [name: string]: string[] }
+}
+
+interface CookieJar {
+  getCookieString: (currentUrl: string) => Promise<string>
+  setCookie: (cookieString: string, currentUrl: string, opts: { ignoreError: boolean }) => Promise<any>
 }
 
 // Credit <https://github.com/node-fetch/node-fetch/blob/5e78af3ba7555fa1e466e804b2e51c5b687ac1a2/src/utils/is.js#L68>.
@@ -94,7 +121,7 @@ function isRedirect (status: number): boolean {
 }
 
 // Adapted from <https://github.com/node-fetch/node-fetch/blob/5e78af3ba7555fa1e466e804b2e51c5b687ac1a2/src/index.js#L161>.
-async function handleRedirect (fetchImpl: FetchImpl, init: FetchCookieInit, response: Response): Promise<Response> {
+async function handleRedirect (fetchImpl: FetchImpl, init: FetchCookieInit<RequestInit>, response: Response): Promise<Response> {
   switch (init.redirect ?? 'follow') {
     case 'error':
       throw new TypeError(`URI requested responded with a redirect and redirect mode is set to error: ${response.url}`)
@@ -205,11 +232,15 @@ function getCookiesFromResponse (response: Response): string[] {
   return []
 }
 
-export default function fetchCookie (fetch: FetchImpl, jar: tough.CookieJar, ignoreError = true): FetchCookieImpl {
-  fetch = fetch || globalThis.fetch
-  jar = jar || new tough.CookieJar()
+export default function fetchCookie<
+  T1 extends GenericRequestInfo,
+  T2 extends GenericRequestInit,
+  T3 extends GenericResponse
+> (fetch: GenericFetch<T1, T2, T3>, jar?: CookieJar, ignoreError = true): FetchCookieImpl<T1, T2, T3> {
+  const actualFetch = fetch as unknown as FetchImpl
+  const actualJar: CookieJar = jar ?? new tough.CookieJar()
 
-  async function fetchCookieWrapper (input: RequestInfo, init?: FetchCookieInit): Promise<Response> {
+  async function fetchCookieWrapper (input: RequestInfo, init?: FetchCookieInit<RequestInit>): Promise<Response> {
     // Keep track of original init for the `redirect` property that we hijack.
     const originalInit = init ?? {}
 
@@ -220,19 +251,19 @@ export default function fetchCookie (fetch: FetchImpl, jar: tough.CookieJar, ign
     const requestUrl = typeof input === 'string' ? input : input.url
 
     // Get matching cookie for resolved request URL.
-    const cookie = await jar.getCookieString(requestUrl)
+    const cookie = await actualJar.getCookieString(requestUrl)
 
     // Add cookie header to request.
     init = addCookiesToRequest(input, init, cookie)
 
     // Proxy to `fetch` implementation.
-    const response = await fetch(input, init)
+    const response = await actualFetch(input, init)
 
     // Get response cookies.
     const cookies = getCookiesFromResponse(response)
 
     // Store cookies in the jar for that URL.
-    await Promise.all(cookies.map(async cookie => await jar.setCookie(cookie, response.url, { ignoreError })))
+    await Promise.all(cookies.map(async cookie => await actualJar.setCookie(cookie, response.url, { ignoreError })))
 
     // Do this check here to allow tail recursion of redirect.
     if ((init.redirectCount ?? 0) > 0) {
@@ -249,7 +280,7 @@ export default function fetchCookie (fetch: FetchImpl, jar: tough.CookieJar, ign
 
   fetchCookieWrapper.toughCookie = tough
 
-  return fetchCookieWrapper
+  return fetchCookieWrapper as any
 }
 
 fetchCookie.toughCookie = tough

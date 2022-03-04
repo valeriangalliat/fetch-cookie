@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.1] - 2022-03-03
+* Fix TypeScript types. ([#68])
+* Because we can't specify different types for ESM and CJS, I chose to
+  drop CJS support for TypeScript as I assume most TypeScript users will
+  use this module with ESM. You can still `import fetchCookie = require('fetch-cookie')`
+  but the type will be wrong (it's a function, not an object with a
+  `default` property as TypeScript assumes).
+
 ## [2.0.0] - 2022-02-17
 * Rewrite in TypeScript. ([#43])
 * Hybrid support of ESM and CJS.
