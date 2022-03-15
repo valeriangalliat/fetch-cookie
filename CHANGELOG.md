@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.2] - 2022-03-15
+* Make build script more portable.
+* Backwards compatibility for environments not supporting the `exports`
+  object in `package.json`, falling back on `main` and `module` fields. [#69]
+
 ## [2.0.1] - 2022-03-03
 * Fix TypeScript types. ([#68])
 * Because we can't specify different types for ESM and CJS, I chose to
@@ -93,7 +98,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.1...v2.0.2
+[2.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v0.11.0...v1.0.0
@@ -145,3 +152,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#60]: https://github.com/valeriangalliat/fetch-cookie/pull/60
 [#63]: https://github.com/valeriangalliat/fetch-cookie/pull/63
 [#65]: https://github.com/valeriangalliat/fetch-cookie/issues/65
+[#68]: https://github.com/valeriangalliat/fetch-cookie/issues/68
+[#69]: https://github.com/valeriangalliat/fetch-cookie/issues/69

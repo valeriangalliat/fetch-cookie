@@ -5,6 +5,8 @@
   "license": "Unlicense",
   "author": "Valérian Galliat (http://val.codejam.info)",
   "type": "module",
+  "main": "./cjs/index-wrapper.js",
+  "module": "./esm/index.js",
   "exports": {
     "import": "./esm/index.js",
     "require": "./cjs/index-wrapper.js"
@@ -12,11 +14,11 @@
   "types": "types/index.d.ts",
   "repository": "valeriangalliat/fetch-cookie",
   "scripts": {
-    "build": "for format in esm cjs; do esbuild src/*.ts --format=$format --outdir=$format; done",
+    "build": "esbuild src/*.ts --format=esm --outdir=esm && esbuild src/*.ts --format=cjs --outdir=cjs",
     "lint": "ts-standard src/*.ts test/*.js",
     "patch-undici": "sed -i 's/^const forbiddenResponseHeaderNames =.*$/const forbiddenResponseHeaderNames = []/' node_modules/undici/lib/fetch/constants.js",
-    "prepare": "npm run build && npm run type-declarations",
     "prepack": "npm run prepare && npm run lint && npm run type-check && npm test",
+    "prepare": "npm run build && npm run type-declarations",
     "test": "mocha",
     "type-check": "tsc -noEmit src/*.ts",
     "type-declarations": "tsc --declaration --emitDeclarationOnly src/*.ts --outDir types"
