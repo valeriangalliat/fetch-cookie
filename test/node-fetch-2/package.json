@@ -2,5 +2,8 @@
   "type": "module",
   "dependencies": {
     "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.1"
   }
 }

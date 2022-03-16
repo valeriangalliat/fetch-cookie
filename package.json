@@ -19,9 +19,9 @@
     "patch-undici": "sed -i 's/^const forbiddenResponseHeaderNames =.*$/const forbiddenResponseHeaderNames = []/' node_modules/undici/lib/fetch/constants.js",
     "prepack": "npm run prepare && npm run lint && npm run type-check && npm test",
     "prepare": "npm run build && npm run type-declarations",
-    "test": "mocha",
-    "type-check": "tsc -noEmit src/*.ts",
-    "type-declarations": "tsc --declaration --emitDeclarationOnly src/*.ts --outDir types"
+    "test": "npm run build && mocha",
+    "type-check": "tsc -noEmit",
+    "type-declarations": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir types"
   },
   "dependencies": {
     "set-cookie-parser": "^2.4.8",

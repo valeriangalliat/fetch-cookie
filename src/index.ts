@@ -7,8 +7,9 @@ import { Readable } from 'stream'
 type FetchImpl = typeof fetch
 
 interface GenericRequest { url: string }
+interface URLLike { href: string }
 
-type GenericRequestInfo = GenericRequest | string
+type GenericRequestInfo = string | URLLike | GenericRequest
 
 interface GenericRequestInit {
   method?: string
@@ -248,7 +249,12 @@ export default function fetchCookie<
     init = { ...init, redirect: 'manual' }
 
     // Resolve request URL.
-    const requestUrl = typeof input === 'string' ? input : input.url
+    //
+    // FWIW it seems that `fetch` allows passing an URL object e.g. with a `href` property, but
+    // TypeScript's `RequestInfo` type doesn't know about that, hence the `any` to still check for it.
+    //
+    // TypeScript is still so very fragile...
+    const requestUrl = typeof input === 'string' ? input : (input.url ?? (input as any).href)
 
     // Get matching cookie for resolved request URL.
     const cookie = await actualJar.getCookieString(requestUrl)
