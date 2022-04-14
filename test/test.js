@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 
 import { assert } from 'chai'
-import fetchCookie from '../esm/index.js'
+import fetchCookie from 'fetch-cookie'
 import * as nodeFetch3 from 'node-fetch'
-import nodeFetch2 from './node-fetch-2/index.js'
+import nodeFetch2 from 'node-fetch-2'
 import * as undici from 'undici'
 import app from './test-server.js'
 
