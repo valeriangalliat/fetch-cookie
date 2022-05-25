@@ -9,12 +9,12 @@
   "module": "./esm/index.js",
   "exports": {
     "import": {
-      "default": "./esm/index.js",
-      "types": "./esm/index.d.ts"
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
     },
     "require": {
-      "default": "./cjs/index-wrapper.js",
-      "types": "./cjs/index.d.ts"
+      "types": "./cjs/index.d.ts",
+      "default": "./cjs/index-wrapper.js"
     }
   },
   "types": "esm/index.d.ts",

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.5] - 2022-05-26
+* Change order of `exports` `default` in `package.json`. ([#72])
+
 ## [2.0.4] - 2022-05-25
 * Support ESM and CJS hybrid types. ([#71])
 
@@ -105,7 +108,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.4...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.5...HEAD
+[2.0.5]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.1...v2.0.2
@@ -165,3 +169,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#69]: https://github.com/valeriangalliat/fetch-cookie/issues/69
 [#70]: https://github.com/valeriangalliat/fetch-cookie/issues/70
 [#71]: https://github.com/valeriangalliat/fetch-cookie/issues/71
+[#72]: https://github.com/valeriangalliat/fetch-cookie/issues/72
