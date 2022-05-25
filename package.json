@@ -22,7 +22,7 @@
   "scripts": {
     "build": "esbuild src/*.ts --format=esm --outdir=esm && esbuild src/*.ts --format=cjs --outdir=cjs",
     "lint": "ts-standard src/*.ts test/*.js",
-    "patch-undici": "sed -i 's/^const forbiddenResponseHeaderNames =.*$/const forbiddenResponseHeaderNames = []/' node_modules/undici/lib/fetch/constants.js",
+    "patch-undici": "sed -i.old 's/^const forbiddenResponseHeaderNames =.*$/const forbiddenResponseHeaderNames = []/' node_modules/undici/lib/fetch/constants.js",
     "prepack": "npm run prepare && npm run lint && npm run type-check && npm test && npm run test-import",
     "prepare": "npm run build && npm run type-declarations",
     "test": "npm run build && mocha",

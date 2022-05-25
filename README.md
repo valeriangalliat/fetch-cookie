@@ -156,7 +156,7 @@ the browser.
 npm ci
 
 # Allows to test node-fetch v2 as well as node-fetch v3
-npm --prefix test/node-fetch-2 ci
+npm --prefix test/node_modules/node-fetch-2 ci
 
 # Allows to test against Undici by removing the blacklisting of `Set-Cookie` headers
 npm run patch-undici
