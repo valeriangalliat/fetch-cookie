@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - run: npm --prefix test/node-fetch-2 ci
+      - run: npm --prefix test/node_modules/node-fetch-2 ci
       - run: npm run patch-undici
       - run: npm run lint
       - run: npm run type-check
