@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.4] - 2022-05-25
+* Support ESM and CJS hybrid types. ([#71])
+
 ## [2.0.3] - 2022-03-16
 * Fix TypeScript types, and add a test to check that TypeScript is happy
   with fetch-cookie, node-fetch v2, v3 and undici. ([#70])
@@ -102,7 +105,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.3...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.4...HEAD
+[2.0.4]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.0...v2.0.1
@@ -160,3 +164,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#68]: https://github.com/valeriangalliat/fetch-cookie/issues/68
 [#69]: https://github.com/valeriangalliat/fetch-cookie/issues/69
 [#70]: https://github.com/valeriangalliat/fetch-cookie/issues/70
+[#71]: https://github.com/valeriangalliat/fetch-cookie/issues/71

@@ -1,5 +1,4 @@
 /node_modules
-/types
 /esm/*
 !/esm/package.json
 /cjs/*
