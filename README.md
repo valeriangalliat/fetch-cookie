@@ -29,20 +29,22 @@ Internally the plugin uses a cookie jar. You can insert your own
 
 ## Usage
 
-```js
-import nodeFetch from 'node-fetch'
-import fetchCookie from 'fetch-cookie'
-
-const fetch = fetchCookie(nodeFetch)
-```
-
-Or in the future when `node --experimental-fetch` allows to read the
-`Set-Cookie` header:
+With Node 18 and greater that has a global `fetch` function provided by
+[undici](https://github.com/nodejs/undici):
 
 ```js
 import makeFetchCookie from 'fetch-cookie'
 
 const fetchCookie = makeFetchCookie(fetch)
+```
+
+Or with node-fetch:
+
+```js
+import nodeFetch from 'node-fetch'
+import fetchCookie from 'fetch-cookie'
+
+const fetch = fetchCookie(nodeFetch)
 ```
 
 ### Custom cookie jar
@@ -51,10 +53,9 @@ If you want to customize the internal cookie jar instance (for example,
 with a custom store), you can inject it as a second argument:
 
 ```js
-import nodeFetch from 'node-fetch'
-import fetchCookie from 'fetch-cookie'
+import makeFetchCookie from 'fetch-cookie'
 
-const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar())
+const fetchCookie = makeFetchCookie(fetch, new makeFetchCookie.toughCookie.CookieJar())
 ```
 
 Here, we expose the tough-cookie version that we depend on internally so
@@ -79,16 +80,42 @@ interface CookieJar {
 }
 ```
 
+### Custom cookie jar with options
+
+If you don't want a custom store and just want to pass [tough-cookie
+options](https://github.com/salesforce/tough-cookie#cookiejarstore-options),
+e.g. to allow cookies on `localhost`:
+
+```js
+import makeFetchCookie from 'fetch-cookie'
+
+const fetchCookie = makeFetchCookie(fetch, new makeFetchCookie.toughCookie.CookieJar(undefined, {
+  allowSpecialUseDomain: true
+}))
+```
+
+Or with a custom store as well:
+
+```js
+import makeFetchCookie from 'fetch-cookie'
+import FileCookieStore from 'file-cookie-store'
+
+const store = new FileCookieStore('cookies.txt')
+
+const fetchCookie = makeFetchCookie(fetch, new makeFetchCookie.toughCookie.CookieJar(store, {
+  allowSpecialUseDomain: true
+}))
+```
+
 ### Ignoring errors
 
 All errors when setting cookies are ignored by default. You can make it
 throw errors in cookies by passing a third argument `ignoreError` (defaulting to `true`).
 
 ```js
-import nodeFetch from 'node-fetch'
-import fetchCookie from 'fetch-cookie'
+import makeFetchCookie from 'fetch-cookie'
 
-const fetch = fetchCookie(nodeFetch, new fetchCookie.toughCookie.CookieJar(), false)
+const fetchCookie = makeFetchCookie(fetch, new makeFetchCookie.toughCookie.CookieJar(), false)
 ```
 
 When set to `false`, fetch-cookie will throw when an error occurs in
@@ -106,12 +133,11 @@ chosen `fetch` implementation, but custom to fetch-cookie.
 We read a `maxRedirect` parameter for that. The default is 20.
 
 ```js
-import nodeFetch from 'node-fetch'
-import fetchCookie from 'fetch-cookie'
+import makeFetchCookie from 'fetch-cookie'
 
-const fetch = fetchCookie(nodeFetch)
+const fetchCookie = makeFetchCookie(fetch)
 
-await fetch(url, { maxRedirect: 10 })
+await fetchCookie(url, { maxRedirect: 10 })
 ```
 
 ## Cookies on redirects
