@@ -29,8 +29,8 @@ Internally the plugin uses a cookie jar. You can insert your own
 
 ## Usage
 
-With Node 18 and greater that has a global `fetch` function provided by
-[undici](https://github.com/nodejs/undici):
+With Node.js 18.3.0 and greater, using the native global `fetch`
+function:
 
 ```js
 import makeFetchCookie from 'fetch-cookie'
