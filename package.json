@@ -8,13 +8,16 @@
   "main": "./cjs/index-wrapper.js",
   "module": "./esm/index.js",
   "exports": {
-    "import": {
-      "types": "./esm/index.d.ts",
-      "default": "./esm/index.js"
-    },
-    "require": {
-      "types": "./cjs/index.d.ts",
-      "default": "./cjs/index-wrapper.js"
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index-wrapper.js"
+      }
     }
   },
   "types": "esm/index.d.ts",

@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0] - 2022-07-12
+* Explicitly export `package.json` to be compatible with bundlers. ([#72])
+
 ## [2.0.5] - 2022-05-26
 * Change order of `exports` `default` in `package.json`. ([#72])
 
@@ -108,7 +111,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.5...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.5...v2.1.0
 [2.0.5]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.0.2...v2.0.3
