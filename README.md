@@ -1,4 +1,4 @@
-# 🍪 fetch-cookie [![npm version](https://img.shields.io/npm/v/fetch-cookie?style=flat-square)](https://www.npmjs.org/package/fetch-cookie) [![Build status](https://img.shields.io/github/workflow/status/valeriangalliat/fetch-cookie/Test?style=flat-square)](https://github.com/valeriangalliat/fetch-cookie/actions/workflows/test.yml)
+# 🍪 fetch-cookie [![npm version](https://img.shields.io/npm/v/fetch-cookie?style=flat-square)](https://www.npmjs.org/package/fetch-cookie) [![Build status](https://img.shields.io/github/actions/workflow/status/valeriangalliat/fetch-cookie/test.yml?style=flat-square)](https://github.com/valeriangalliat/fetch-cookie/actions/workflows/test.yml)
 
 > Decorator for a `fetch` function to support automatic cookie storage
 > and population.
