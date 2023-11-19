@@ -44,7 +44,7 @@ type NodeFetchHeaders = Headers & {
   raw?: () => { [name: string]: string[] }
 }
 
-interface CookieJar {
+export interface CookieJar {
   getCookieString: (currentUrl: string) => Promise<string>
   setCookie: (cookieString: string, currentUrl: string, opts: { ignoreError: boolean }) => Promise<any>
 }
