@@ -1,6 +1,6 @@
 {
   "name": "fetch-cookie",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Decorator for a `fetch` function to support automatic cookies.",
   "license": "Unlicense",
   "author": "Val (https://val.codejam.info)",
