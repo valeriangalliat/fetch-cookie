@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.2.0] - 2024-02-01
+* Export `CookieJar` interface. ([#81])
+
 ## [2.1.0] - 2022-07-12
 * Explicitly export `package.json` to be compatible with bundlers. ([#72])
 
