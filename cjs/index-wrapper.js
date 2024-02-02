@@ -1,1 +1,1 @@
-module.exports = require('./index.js').default
+module.exports = require('./index.js')
