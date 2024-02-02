@@ -31,7 +31,7 @@
     "test": "npm run build && mocha",
     "test-import": "node test/cjs/import.js && ts-node test/cjs/import.ts",
     "type-check": "tsc -noEmit",
-    "type-declarations": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir esm && cat esm/index.d.ts | sed 's/^export default /export = /' > cjs/index.d.ts"
+    "type-declarations": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir esm && cp esm/index.d.ts cjs/index.d.ts"
   },
   "dependencies": {
     "set-cookie-parser": "^2.4.8",
