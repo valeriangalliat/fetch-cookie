@@ -1,6 +1,4 @@
 /node_modules
-/esm/*
-!/esm/package.json
-/cjs/*
-!/cjs/package.json
-!/cjs/index-wrapper.js
+/esm/index.js
+/cjs/index.js
+/index.d.ts
