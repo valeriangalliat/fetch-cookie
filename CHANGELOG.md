@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.0.0] - 2024-02-21
+* Export `FetchCookieImpl` interface. ([#81])
+* **Breaking:** move away from CJS `module.exports = fetchCookie` style,
+  instead use more standard and future-proof `exports.default = fetchCookie`.
+  When using CJS, you now need to `const fetchCookie = require('fetch-cookie').default`
+  instead of `const fetchCookie = require('fetch-cookie')` previously.
+
 ## [2.2.0] - 2024-02-01
 * Export `CookieJar` interface. ([#81])
 
