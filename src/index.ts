@@ -34,7 +34,7 @@ type FetchCookieInit<T extends GenericRequestInit> = T & {
 
 type GenericFetch<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> = (input: T1, init?: T2) => Promise<T3>
 
-interface FetchCookieImpl<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> {
+export interface FetchCookieImpl<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> {
   (input: T1, init?: FetchCookieInit<T2>): Promise<T3>
   toughCookie: typeof tough
 }
