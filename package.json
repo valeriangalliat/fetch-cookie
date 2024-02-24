@@ -11,14 +11,16 @@
     "./package.json": "./package.json",
     ".": {
       "import": {
+        "types": "./esm/index.d.ts",
         "default": "./esm/index.js"
       },
       "require": {
+        "types": "./cjs/index.d.ts",
         "default": "./cjs/index.js"
       }
     }
   },
-  "types": "index.d.ts",
+  "types": "cjs/index.d.ts",
   "repository": "valeriangalliat/fetch-cookie",
   "scripts": {
     "build": "esbuild src/*.ts --format=esm --outdir=esm && esbuild src/*.ts --format=cjs --outdir=cjs",
@@ -29,7 +31,7 @@
     "test": "npm run build && mocha",
     "test-import": "node test/cjs/import.js && ts-node test/cjs/import.ts",
     "type-check": "tsc -noEmit",
-    "type-declarations": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir ."
+    "type-declarations": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir esm && cp esm/index.d.ts cjs"
   },
   "dependencies": {
     "set-cookie-parser": "^2.4.8",

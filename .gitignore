@@ -1,4 +1,5 @@
 /node_modules
 /esm/index.js
+/esm/index.d.ts
 /cjs/index.js
-/index.d.ts
+/cjs/index.d.ts
