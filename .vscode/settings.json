@@ -1,7 +1,8 @@
 {
-    "javascript.format.enable": false,
-    "typescript.format.enable": false,
-    "standard.enable": true,
-    "standard.autoFixOnSave": true,
-    "standard.engine": "ts-standard"
+  "editor.formatOnSave": false,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "standard.enable": true,
+  "standard.autoFixOnSave": true,
+  "standard.engine": "ts-standard"
 }

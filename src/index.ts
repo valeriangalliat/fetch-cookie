@@ -185,7 +185,7 @@ async function handleRedirect (fetchImpl: FetchImpl, init: FetchCookieInit<Reque
   return await fetchImpl(redirectUrl, init)
 }
 
-function addCookiesToRequest (input: RequestInfo, init: RequestInit, cookie: string): RequestInit {
+function addCookiesToRequest (input: RequestInfo | URL, init: RequestInit, cookie: string): RequestInit {
   if (cookie === '') {
     return init
   }
@@ -241,7 +241,7 @@ export default function fetchCookie<
   const actualFetch = fetch as unknown as FetchImpl
   const actualJar: CookieJar = jar ?? new tough.CookieJar()
 
-  async function fetchCookieWrapper (input: RequestInfo, init?: FetchCookieInit<RequestInit>): Promise<Response> {
+  async function fetchCookieWrapper (input: RequestInfo | URL, init?: FetchCookieInit<RequestInit>): Promise<Response> {
     // Keep track of original init for the `redirect` property that we hijack.
     const originalInit = init ?? {}
 
@@ -249,12 +249,7 @@ export default function fetchCookie<
     init = { ...init, redirect: 'manual' }
 
     // Resolve request URL.
-    //
-    // FWIW it seems that `fetch` allows passing an URL object e.g. with a `href` property, but
-    // TypeScript's `RequestInfo` type doesn't know about that, hence the `any` to still check for it.
-    //
-    // TypeScript is still so very fragile...
-    const requestUrl = typeof input === 'string' ? input : (input.url ?? (input as any).href)
+    const requestUrl = typeof input === 'string' ? input : 'href' in input ? input.href : input.url
 
     // Get matching cookie for resolved request URL.
     const cookie = await actualJar.getCookieString(requestUrl)
