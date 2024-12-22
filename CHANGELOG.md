@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.1.0] - 2024-12-22
+* Handle redirect to other domain while passing explicit host header. ([#77])
+* Handle headers array. ([#80])
+* Expose cookie jar on fetch wrapper. ([#82])
+* Upgrade tough-cookie to 5.0.0. ([#87], [#88])
+
 ## [3.0.1] - 2024-02-24
 * Fix an issue with type declarations resolution. ([#84])
 
@@ -124,7 +130,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.0] - 2015-04-04
 * Initial release.
 
-[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/valeriangalliat/fetch-cookie/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/valeriangalliat/fetch-cookie/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.2.0...v3.0.0
 [2.2.0]: https://github.com/valeriangalliat/fetch-cookie/compare/v2.1.0...v2.2.0
@@ -190,5 +197,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [#70]: https://github.com/valeriangalliat/fetch-cookie/issues/70
 [#71]: https://github.com/valeriangalliat/fetch-cookie/issues/71
 [#72]: https://github.com/valeriangalliat/fetch-cookie/issues/72
+[#77]: https://github.com/valeriangalliat/fetch-cookie/issues/77
+[#80]: https://github.com/valeriangalliat/fetch-cookie/issues/80
 [#81]: https://github.com/valeriangalliat/fetch-cookie/pull/81
+[#82]: https://github.com/valeriangalliat/fetch-cookie/issues/82
 [#84]: https://github.com/valeriangalliat/fetch-cookie/issues/84
+[#87]: https://github.com/valeriangalliat/fetch-cookie/issues/87
+[#88]: https://github.com/valeriangalliat/fetch-cookie/pull/88
