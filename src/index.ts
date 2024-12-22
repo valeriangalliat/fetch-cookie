@@ -182,6 +182,9 @@ async function handleRedirect (fetchImpl: FetchImpl, init: FetchCookieInit<Reque
     init.referrerPolicy = parseReferrerPolicy(response.headers.get('referrer-policy') as string)
   }
 
+  // Remove any explicit host header to avoid sending the wrong host in redirects to other host.
+  deleteHeader(init, 'host')
+
   return await fetchImpl(redirectUrl, init)
 }
 

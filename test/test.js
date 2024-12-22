@@ -53,7 +53,7 @@ function suite (name, fetchImpl, Request) {
     it('should handle cookies (using internal cookie jar)', async () => {
       await fetch('http://localhost:9999/set?name=foo&value=bar')
       const res = await fetch('http://localhost:9999/get')
-      assert.deepEqual(await res.json(), ['foo=bar'])
+      assert.deepEqual((await res.json()).cookies, ['foo=bar'])
     })
 
     // This test esentially tests if to clients with different jars are
@@ -148,7 +148,7 @@ function suite (name, fetchImpl, Request) {
       const fetch = fetchCookie(fetchImpl, jar)
       const res = await fetch('http://localhost:9999/set-redirect?name=foo&value=bar')
       assert.isTrue(res.redirected)
-      assert.deepEqual(await res.json(), ['foo=bar'])
+      assert.deepEqual((await res.json()).cookies, ['foo=bar'])
     })
 
     it('should handle relative redirects', async () => {
@@ -156,7 +156,35 @@ function suite (name, fetchImpl, Request) {
       const fetch = fetchCookie(fetchImpl, jar)
       const res = await fetch('http://localhost:9999/set-relative-redirect?name=foo&value=bar')
       assert.isTrue(res.redirected)
-      assert.deepEqual(await res.json(), ['foo=bar'])
+      assert.deepEqual((await res.json()).cookies, ['foo=bar'])
+    })
+
+    it('should handle redirects to another domain', async () => {
+      const jar = new CookieJar()
+      const fetch = fetchCookie(fetchImpl, jar)
+      const res = await fetch('http://localhost:9999/set-other-host-redirect?name=foo&value=bar')
+      assert.isTrue(res.redirected)
+      assert.deepEqual(await res.json(), {
+        hostname: '127.0.0.1',
+        cookies: []
+      })
+    })
+
+    it('should handle redirects to another domain explicit host header', async () => {
+      const jar = new CookieJar()
+      const fetch = fetchCookie(fetchImpl, jar)
+
+      const res = await fetch('http://localhost:9999/set-other-host-redirect?name=foo&value=bar', {
+        headers: {
+          host: 'localhost:9999'
+        }
+      })
+
+      assert.isTrue(res.redirected)
+      assert.deepEqual(await res.json(), {
+        hostname: '127.0.0.1',
+        cookies: []
+      })
     })
   })
 }
