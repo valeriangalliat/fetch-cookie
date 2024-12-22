@@ -47,6 +47,20 @@ import fetchCookie from 'fetch-cookie'
 const fetch = fetchCookie(nodeFetch)
 ```
 
+### Accessing the cookie jar
+
+If you need to manipulate the cookie jar directly:
+
+```js
+import makeFetchCookie from 'fetch-cookie'
+
+const fetchCookie = makeFetchCookie(fetch)
+
+const cookie = await fetchCookie.cookieJar.getCookieString(url)
+
+fetchCookie.cookieJar.setCookie(cookie, url)
+```
+
 ### Custom cookie jar
 
 If you want to customize the internal cookie jar instance (for example,

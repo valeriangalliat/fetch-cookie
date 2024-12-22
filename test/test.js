@@ -194,5 +194,10 @@ function suite (name, fetchImpl, Request) {
       assert.deepEqual(json.cookies, ['foo=bar'])
       assert.equal(json.headers['x-foo'], 'bar')
     })
+
+    it('should expose the cookie jar', async () => {
+      await fetch('http://localhost:9999/set?name=foo&value=bar')
+      assert.equal(await fetch.cookieJar.getCookieString('http://localhost:9999'), 'foo=bar')
+    })
   })
 }

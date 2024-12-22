@@ -34,11 +34,6 @@ type FetchCookieInit<T extends GenericRequestInit> = T & {
 
 type GenericFetch<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> = (input: T1, init?: T2) => Promise<T3>
 
-export interface FetchCookieImpl<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> {
-  (input: T1, init?: FetchCookieInit<T2>): Promise<T3>
-  toughCookie: typeof tough
-}
-
 type NodeFetchHeaders = Headers & {
   getAll?: (name: string) => string[]
   raw?: () => { [name: string]: string[] }
@@ -47,6 +42,12 @@ type NodeFetchHeaders = Headers & {
 export interface CookieJar {
   getCookieString: (currentUrl: string) => Promise<string>
   setCookie: (cookieString: string, currentUrl: string, opts: { ignoreError: boolean }) => Promise<any>
+}
+
+export interface FetchCookieImpl<T1 extends GenericRequestInfo, T2 extends GenericRequestInit, T3> {
+  (input: T1, init?: FetchCookieInit<T2>): Promise<T3>
+  toughCookie: typeof tough
+  cookieJar: CookieJar
 }
 
 // Credit <https://github.com/node-fetch/node-fetch/blob/5e78af3ba7555fa1e466e804b2e51c5b687ac1a2/src/utils/is.js#L68>.
@@ -294,6 +295,7 @@ export default function fetchCookie<
   }
 
   fetchCookieWrapper.toughCookie = tough
+  fetchCookieWrapper.cookieJar = actualJar
 
   return fetchCookieWrapper as any
 }
