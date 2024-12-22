@@ -164,10 +164,9 @@ function suite (name, fetchImpl, Request) {
       const fetch = fetchCookie(fetchImpl, jar)
       const res = await fetch('http://localhost:9999/set-other-host-redirect?name=foo&value=bar')
       assert.isTrue(res.redirected)
-      assert.deepEqual(await res.json(), {
-        hostname: '127.0.0.1',
-        cookies: []
-      })
+      const json = await res.json()
+      assert.deepEqual(json.cookies, [])
+      assert.equal(json.headers.host, '127.0.0.1:9999')
     })
 
     it('should handle redirects to another domain explicit host header', async () => {
@@ -181,10 +180,19 @@ function suite (name, fetchImpl, Request) {
       })
 
       assert.isTrue(res.redirected)
-      assert.deepEqual(await res.json(), {
-        hostname: '127.0.0.1',
-        cookies: []
+      const json = await res.json()
+      assert.deepEqual(json.cookies, [])
+      assert.equal(json.headers.host, '127.0.0.1:9999')
+    })
+
+    it('should work with headers array', async () => {
+      await fetch('http://localhost:9999/set?name=foo&value=bar')
+      const res = await fetch('http://localhost:9999/get', {
+        headers: [['x-foo', 'bar']]
       })
+      const json = await res.json()
+      assert.deepEqual(json.cookies, ['foo=bar'])
+      assert.equal(json.headers['x-foo'], 'bar')
     })
   })
 }

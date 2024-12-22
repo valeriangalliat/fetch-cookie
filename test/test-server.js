@@ -47,7 +47,7 @@ app.get('/get', (req, res) => {
   }
 
   res.json({
-    hostname: req.hostname,
+    headers: req.headers,
     cookies
   })
 })

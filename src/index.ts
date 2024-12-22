@@ -200,6 +200,17 @@ function addCookiesToRequest (input: RequestInfo | URL, init: RequestInit, cooki
     maybeRequest.headers.append('cookie', cookie)
   } else if (maybeHeaders && typeof maybeHeaders.append === 'function') {
     maybeHeaders.append('cookie', cookie)
+  } else if (Array.isArray(init.headers)) {
+    const headers = [...init.headers]
+    const cookieHeaderIndex = headers.findIndex(header => header[0].toLowerCase() === 'cookie')
+
+    if (cookieHeaderIndex === -1) {
+      headers.push(['cookie', cookie])
+    } else {
+      headers[cookieHeaderIndex] = ['cookie', cookie]
+    }
+
+    init = { ...init, headers }
   } else {
     init = { ...init, headers: { ...init.headers, cookie } }
   }
