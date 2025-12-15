@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "set-cookie-parser": "^2.4.8",
-    "tough-cookie": "^5.0.0"
+    "tough-cookie": "^6.0.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
